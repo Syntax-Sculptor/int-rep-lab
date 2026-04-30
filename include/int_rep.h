@@ -7,6 +7,8 @@
 #ifndef INT_REP_H
 #define INT_REP_H
 
+#include <stdint.h>
+
 /* 
     Returns whether the provided bit width is supported.
 
@@ -14,5 +16,15 @@
     program will handle that case separately to prevent undefined behavior.
 */
 int is_valid_width(int width);
+
+/*
+    Returns a value truncated to the provided bit width. Only the lowest bits
+    are preserved while higher bits are cleared (i.e. masking 0xAB to width 4
+    results in 0xB).
+
+    Valid widths are 1-32 (inclusive). To check if a value is valid, see
+    `is_valid_width`.
+*/
+uint32_t mask_to_width(uint32_t value, int width);
 
 #endif
