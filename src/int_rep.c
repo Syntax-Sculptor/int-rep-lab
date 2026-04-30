@@ -11,11 +11,11 @@
 #include <stdint.h>
 
 int is_valid_width(int width) {
-    return width > 0 && width <= 32;
+    return width > 0 && width <= MAX_SHIFT_SIZE;
 }
 
 uint32_t mask_to_width(uint32_t value, int width) {
-    if (width == 32) {
+    if (width == MAX_SHIFT_SIZE) {
         return value;
     } else {
         uint32_t mask = ((1U << width) - 1);

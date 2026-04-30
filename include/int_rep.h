@@ -6,6 +6,7 @@
 
 #ifndef INT_REP_H
 #define INT_REP_H
+#define MAX_SHIFT_SIZE 32
 
 #include <stdint.h>
 
