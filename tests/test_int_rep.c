@@ -19,6 +19,11 @@ typedef struct bits_to_string_config {
     char *expected_value;
 } bits_to_string_config;
 
+typedef struct mask_to_width_config {
+    uint32_t value;
+    
+}
+
 // Tests to see if a valid width is correctly being detected as valid.
 void test_is_valid_width() {
     for (int i = 1; i <= MAX_SHIFT_SIZE; i++) {

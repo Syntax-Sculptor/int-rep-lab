@@ -35,4 +35,15 @@ uint32_t mask_to_width(uint32_t value, int width);
 */
 int bits_to_string(uint32_t value, int width, char* buff, size_t buff_size);
 
+/*
+    Interprets a value truncated to the provided bit width as a two's-complement
+    signed integer. Only the lowest bits are used, while higher bits are ignored
+    (i.e. interpreting 0xAB at width 4 uses the bit pattern 0xB / 1011, which
+    represents -5).
+
+    Valid widths are 1-32 inclusive. To check if a width is valid, see
+    is_valid_width().
+*/
+int32_t get_signed_value(uint32_t value, int width);
+
 #endif
