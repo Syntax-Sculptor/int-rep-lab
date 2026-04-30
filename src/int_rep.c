@@ -7,3 +7,7 @@
 */
 
 #include "int_rep.h"
+
+int is_valid_width(int width) {
+    return width > 0 && width <= 32;
+}
