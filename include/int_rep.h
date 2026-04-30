@@ -7,6 +7,7 @@
 #ifndef INT_REP_H
 #define INT_REP_H
 #define MAX_SHIFT_SIZE 32
+#define MAX_BIT_STRING_SIZE (MAX_SHIFT_SIZE + 1)
 
 #include <stdint.h>
 
