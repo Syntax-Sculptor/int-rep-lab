@@ -22,3 +22,30 @@ uint32_t mask_to_width(uint32_t value, int width) {
         return value & mask;
     }
 }
+
+int bits_to_string(
+    uint32_t value, 
+    int width, 
+    char* buff, 
+    size_t buff_size
+) {
+    if (width + 1 > buff_size) {
+        return 0;
+    }
+
+    for (int i = width - 1; i >= 0; i--) {
+        int bit = value & (1U << i);
+        int buff_idx = width - i - 1;
+
+        if (bit > 0) {
+            buff[buff_idx] = '1';
+        }
+        else {
+            buff[buff_idx] = '0';
+        }
+    }
+
+    buff[width] = '\0';
+    
+    return 1;
+}

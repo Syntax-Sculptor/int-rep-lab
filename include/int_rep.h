@@ -27,4 +27,10 @@ int is_valid_width(int width);
 */
 uint32_t mask_to_width(uint32_t value, int width);
 
+/*
+    Converts a value into a binary string. Returns 0 if the function is unable
+    to run due to the risk of writing past the buffer.
+*/
+int bits_to_string(uint32_t value, int width, char* buff, size_t buff_size);
+
 #endif
