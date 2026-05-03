@@ -31,6 +31,11 @@ typedef struct get_signed_value_config {
     int32_t expected_value;  
 } get_signed_value_config;
 
+typedef struct get_umax_config {
+    int width;
+    uint32_t expected_value;
+} get_umax_config;
+
 // Tests to see if a valid width is correctly being detected as valid.
 void test_is_valid_width() {
     for (int i = 1; i <= MAX_SHIFT_SIZE; i++) {
@@ -131,6 +136,22 @@ void test_get_signed_value() {
     }
 }
 
+// Tests get_umax()
+void test_get_umax() {
+    get_umax_config cases[] = {
+        {1, 1U},
+        {4, 15U},
+        {8, 255U},
+        {16, 65535U},
+        {32, UINT32_MAX},
+    };
+
+    for (int i = 0; i < sizeof(cases) / sizeof(cases[0]); i++) {
+        uint32_t res = get_umax(cases[i].width);
+        assert(res == cases[i].expected_value);
+    }
+}
+
 int main() {
     printf("Beginning tests.\n");
 
@@ -140,6 +161,7 @@ int main() {
     test_bits_to_string();
     test_bits_to_string_buffer_checks();
     test_get_signed_value();
+    test_get_umax();
 
     printf("All tests passed :)");
 

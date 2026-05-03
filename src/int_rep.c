@@ -8,7 +8,6 @@
 
 #include "int_rep.h"
 
-#include <math.h>
 #include <stdint.h>
 
 int is_valid_width(int width) {
@@ -66,4 +65,12 @@ int32_t get_signed_value(uint32_t value, int width) {
 
         return (int32_t) masked - ((uint64_t)1 << width);
     }
+}
+
+uint32_t get_umax(int width) {
+    // 1 << width is equivalent to 2^width. We cast it to a uint64_t as
+    // the width can be 32, which would cause an overflow if it was a
+    // uint32_t.
+    uint64_t exp = (uint64_t)1 << width;
+    return (uint32_t) (exp - 1);
 }

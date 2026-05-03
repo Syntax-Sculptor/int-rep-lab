@@ -46,4 +46,13 @@ int bits_to_string(uint32_t value, int width, char* buff, size_t buff_size);
 */
 int32_t get_signed_value(uint32_t value, int width);
 
+/*
+    Gets the maximum value for an unsigned 32 bit integer corresponding to the
+    provided width. It's calcxulated as 2^width - 1.
+
+    Valid widths are 1-32 inclusive. To check if a width is valid, see
+    is_valid_width().
+*/
+uint32_t get_umax(int width);
+
 #endif
