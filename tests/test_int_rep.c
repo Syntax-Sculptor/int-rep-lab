@@ -25,6 +25,12 @@ typedef struct mask_to_width_config {
     uint32_t expected_value;
 } mask_to_width_config;
 
+typedef struct get_signed_value_config {
+    uint32_t value;
+    int width;
+    int32_t expected_value;  
+} get_signed_value_config;
+
 // Tests to see if a valid width is correctly being detected as valid.
 void test_is_valid_width() {
     for (int i = 1; i <= MAX_SHIFT_SIZE; i++) {
@@ -46,7 +52,7 @@ void test_is_invalid_width() {
 // Tests to make sure masking values work.
 void test_mask_to_width() {
     // {value, mask width, expected value}
-    mask_to_width_config cases[][3] = {
+    mask_to_width_config cases[] = {
         {0xAB, 4, 0xB},
         {0xAB, 8, 0xAB},
         {0x5, 4, 0x5},
@@ -56,8 +62,8 @@ void test_mask_to_width() {
     };
 
     for (int i = 0; i < sizeof(cases) / sizeof(cases[0]); i++) {
-        uint32_t res = mask_to_width(cases[i]->value, cases[i]->width);
-        assert(res == cases[i]->expected_value);
+        uint32_t res = mask_to_width(cases[i].value, cases[i].width);
+        assert(res == cases[i].expected_value);
     }
 }
 
@@ -97,7 +103,32 @@ void test_bits_to_string_buffer_checks() {
 }
 
 void test_get_signed_value() {
+    get_signed_value_config cases[] = {
+        {0x0, 1, 0},
+        {0x1, 1, -1},
 
+        {0x0, 4, 0},
+        {0x7, 4, 7},
+        {0x8, 4, -8},
+        {0xB, 4, -5},
+        {0xF, 4, -1},
+
+        {0x7F, 8, 127},
+        {0x80, 8, -128},
+        {0xFF, 8, -1},
+
+        {0x3039, 16, 12345},
+        {0xCFC7, 16, -12345},
+
+        {0x7FFFFFFF, 32, 2147483647},
+        {0x80000000, 32, INT32_MIN},
+        {0xFFFFFFFF, 32, -1},
+    };
+
+    for (int i = 0; i < sizeof(cases) / sizeof(cases[0]); i++) {
+        uint32_t res = get_signed_value(cases[i].value, cases[i].width);
+        assert(res == cases[i].expected_value);
+    }
 }
 
 int main() {
