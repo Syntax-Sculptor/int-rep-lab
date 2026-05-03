@@ -8,6 +8,7 @@
 
 #include "int_rep.h"
 
+#include <math.h>
 #include <stdint.h>
 
 int is_valid_width(int width) {
@@ -48,4 +49,21 @@ int bits_to_string(
     buff[width] = '\0';
     
     return 1;
+}
+
+int32_t get_signed_value(uint32_t value, int width) {
+    uint32_t masked = mask_to_width(value, width);
+
+    uint32_t signed_bit = masked & (1U << (width - 1));
+
+    if (signed_bit == 0) {
+        return (int32_t) masked;
+    }
+    else {
+        // 1 << width is equivalent to 2^width. We cast it to a uint64_t as
+        // the width can be 32, which would cause an overflow if it was a
+        // uint32_t.
+
+        return (int32_t) masked - ((uint64_t)1 << width);
+    }
 }

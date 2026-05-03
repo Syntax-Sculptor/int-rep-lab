@@ -126,7 +126,7 @@ void test_get_signed_value() {
     };
 
     for (int i = 0; i < sizeof(cases) / sizeof(cases[0]); i++) {
-        uint32_t res = get_signed_value(cases[i].value, cases[i].width);
+        int32_t res = get_signed_value(cases[i].value, cases[i].width);
         assert(res == cases[i].expected_value);
     }
 }
@@ -139,6 +139,7 @@ int main() {
     test_mask_to_width();
     test_bits_to_string();
     test_bits_to_string_buffer_checks();
+    test_get_signed_value();
 
     printf("All tests passed :)");
 
