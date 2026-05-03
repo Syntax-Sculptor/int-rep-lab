@@ -21,8 +21,9 @@ typedef struct bits_to_string_config {
 
 typedef struct mask_to_width_config {
     uint32_t value;
-    
-}
+    int width;
+    char *expected_value;
+} mask_to_width_config;
 
 // Tests to see if a valid width is correctly being detected as valid.
 void test_is_valid_width() {
@@ -45,7 +46,7 @@ void test_is_invalid_width() {
 // Tests to make sure masking values work.
 void test_mask_to_width() {
     // {value, mask width, expected value}
-    uint32_t cases[][3] = {
+    mask_to_width_config cases[][3] = {
         {0xAB, 4, 0xB},
         {0xAB, 8, 0xAB},
         {0x5, 4, 0x5},
@@ -55,8 +56,8 @@ void test_mask_to_width() {
     };
 
     for (int i = 0; i < sizeof(cases) / sizeof(cases[0]); i++) {
-        uint32_t res = mask_to_width(cases[i][0], cases[i][1]);
-        assert(res == cases[i][2]);
+        uint32_t res = mask_to_width(cases[i]->value, cases[i]->width);
+        assert(res == cases[i]->expected_value);
     }
 }
 
@@ -93,6 +94,10 @@ void test_bits_to_string_buffer_checks() {
 
     int unsafe_res = bits_to_string(0xFF, 4, buff, 1);
     assert(unsafe_res == 0);
+}
+
+void test_get_signed_value() {
+
 }
 
 int main() {
