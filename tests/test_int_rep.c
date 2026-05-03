@@ -22,7 +22,7 @@ typedef struct bits_to_string_config {
 typedef struct mask_to_width_config {
     uint32_t value;
     int width;
-    char *expected_value;
+    uint32_t expected_value;
 } mask_to_width_config;
 
 // Tests to see if a valid width is correctly being detected as valid.
