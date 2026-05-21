@@ -15,7 +15,7 @@ int main() {
     uint32_t val = 0xAB;
     int width = 4;
     uint32_t res = mask_to_width(val, width);
-    printf("Result: %02x\n", res);
+    printf("Result: 0x%02x\n", res);
 
     return EXIT_SUCCESS;
 }
