@@ -75,3 +75,12 @@ uint32_t get_umax(int width) {
     uint64_t exp = (uint64_t)1 << width;
     return (uint32_t) (exp - 1);
 }
+
+int32_t get_tmin(int width) {
+    // 1 << (width - 1) is equivalent to 2^(width - 1). We cast it to a int64_t 
+    // as the width can be 32, which would cause an overflow if it was a
+    // int32_t.
+    int64_t exp = (int64_t) 1 << (width - 1);
+
+    return (int32_t) (exp * -1);
+}

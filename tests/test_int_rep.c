@@ -36,6 +36,11 @@ typedef struct get_umax_config {
     uint32_t expected_value;
 } get_umax_config;
 
+typedef struct get_tmin_config {
+    int width;
+    int32_t expected_value;
+} get_tmin_config;
+
 // Tests to see if a valid width is correctly being detected as valid.
 void test_is_valid_width() {
     for (int i = 1; i <= MAX_SHIFT_SIZE; i++) {
@@ -108,7 +113,7 @@ void test_bits_to_string_buffer_checks() {
     assert(unsafe_res == 0);
 }
 
-// Tests get_signed_value() to see if it produces expected outputs.
+// Tests get_signed_value() to see if it produces expected results.
 void test_get_signed_value() {
     get_signed_value_config cases[] = {
         {0x0, 1, 0},
@@ -138,7 +143,7 @@ void test_get_signed_value() {
     }
 }
 
-// Tests get_umax() to see if it produces expected outputs.
+// Tests get_umax() to see if it produces expected results.
 void test_get_umax() {
     get_umax_config cases[] = {
         {1, 1U},
@@ -154,6 +159,22 @@ void test_get_umax() {
     }
 }
 
+// Tests get_tmin() to see if it produces expected results.
+void test_get_tmin() {
+    get_tmin_config cases[] = {
+        {1, -1},
+        {4, -8},
+        {8, -128},
+        {16, -32768},
+        {32, INT32_MIN},
+    };
+
+    for (int i = 0; i < sizeof(cases) / sizeof(cases[0]); i++) {
+        int32_t res = get_tmin(cases[i].width);
+        assert(res == cases[i].expected_value);
+    }
+}
+
 int main() {
     printf("Beginning tests.\n");
 
@@ -164,6 +185,7 @@ int main() {
     test_bits_to_string_buffer_checks();
     test_get_signed_value();
     test_get_umax();
+    test_get_tmin();
 
     printf("All tests passed :)\n");
 

@@ -56,4 +56,14 @@ int32_t get_signed_value(uint32_t value, int width);
 */
 uint32_t get_umax(int width);
 
+/*
+    Gets the minimum value for a signed 32 bit integer corresponding to the
+    provided width. It's calculated as -2^(width - 1).
+
+    Valid widths are 1-32 inclusive. To check if a width is valid, see
+    is_valid_width()
+*/
+int32_t get_tmin(int width);
+
+
 #endif
