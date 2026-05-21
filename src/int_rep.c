@@ -9,6 +9,7 @@
 #include "int_rep.h"
 
 #include <stdint.h>
+#include <stddef.h>
 
 int is_valid_width(int width) {
     return width > 0 && width <= MAX_SHIFT_SIZE;

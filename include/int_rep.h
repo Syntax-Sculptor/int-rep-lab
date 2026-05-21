@@ -10,6 +10,7 @@
 #define MAX_BIT_STRING_SIZE (MAX_SHIFT_SIZE + 1)
 
 #include <stdint.h>
+#include <stddef.h>
 
 /* 
     Returns whether the provided bit width is supported.
