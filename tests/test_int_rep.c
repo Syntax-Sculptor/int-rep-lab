@@ -175,6 +175,22 @@ void test_get_tmin() {
     }
 }
 
+// Tests get_tmax() to see if it produces expected results.
+void test_get_tmax() {
+    get_tmin_config cases[] = {
+        {1, 0},
+        {4, 7},
+        {8, 127},
+        {16, 32767},
+        {32, INT32_MAX},
+    };
+
+    for (int i = 0; i < sizeof(cases) / sizeof(cases[0]); i++) {
+        int32_t res = get_tmax(cases[i].width);
+        assert(res == cases[i].expected_value);
+    }
+}
+
 int main() {
     printf("Beginning tests.\n");
 
@@ -186,6 +202,7 @@ int main() {
     test_get_signed_value();
     test_get_umax();
     test_get_tmin();
+    test_get_tmax();
 
     printf("All tests passed :)\n");
 

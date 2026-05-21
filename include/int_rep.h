@@ -65,5 +65,13 @@ uint32_t get_umax(int width);
 */
 int32_t get_tmin(int width);
 
+/*
+    Gets the maximum value for a signed 32 bit integer corresponding to the
+    provided width. It's calculated as 2^(width - 1) - 1.
+
+    Valid widths are 1-32 inclusive. To check if a width is valid, see
+    is_valid_width()
+*/   
+int32_t get_tmax(int width);
 
 #endif

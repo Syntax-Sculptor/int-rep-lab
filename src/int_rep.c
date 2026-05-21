@@ -84,3 +84,9 @@ int32_t get_tmin(int width) {
 
     return (int32_t) (exp * -1);
 }
+
+int32_t get_tmax(int width) {
+    int64_t exp = ((int64_t)1 << (width - 1)) - 1;
+
+    return (int32_t) exp;
+}
