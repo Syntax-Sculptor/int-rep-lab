@@ -98,6 +98,7 @@ void test_bits_to_string() {
     }
 }
 
+// Teststo see if bits_to_string successfully prevents writing past the buffer.
 void test_bits_to_string_buffer_checks() {
     char buff[MAX_BIT_STRING_SIZE];
     int safe_res = bits_to_string(0xFF, 4, buff, 5);
@@ -107,6 +108,7 @@ void test_bits_to_string_buffer_checks() {
     assert(unsafe_res == 0);
 }
 
+// Tests get_signed_value() to see if it produces expected outputs.
 void test_get_signed_value() {
     get_signed_value_config cases[] = {
         {0x0, 1, 0},
@@ -136,7 +138,7 @@ void test_get_signed_value() {
     }
 }
 
-// Tests get_umax()
+// Tests get_umax() to see if it produces expected outputs.
 void test_get_umax() {
     get_umax_config cases[] = {
         {1, 1U},
@@ -163,7 +165,7 @@ int main() {
     test_get_signed_value();
     test_get_umax();
 
-    printf("All tests passed :)");
+    printf("All tests passed :)\n");
 
     return EXIT_SUCCESS;
 }
