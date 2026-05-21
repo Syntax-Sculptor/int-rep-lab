@@ -88,6 +88,22 @@ int main(int argc, char* argv[]) {
         return EXIT_FAILURE;
     }
 
+    // Actual reporting magic!
+    char bits[MAX_BIT_STRING_SIZE];
+    int bits_to_string_res = bits_to_string(val, width, bits, MAX_BIT_STRING_SIZE);
+
+    if (bits_to_string_res == 0) {
+        printf("Failed to convert bits to string properly.\n");
+        return EXIT_FAILURE;
+    }
+
+    printf("Bits:       %s\n", bits);
+    printf("Width:      %x\n", width);
+    printf("Unsigned:   %d\n", val);
+    printf("twos-comp:  %d\n", get_signed_value(val, width));
+    printf("TMin:       %d\n", get_tmin(width));
+    printf("TMax:       %d\n", get_tmax(width));
+    printf("UMax:       %d\n", get_umax(width));
     
     return EXIT_SUCCESS;
 }
